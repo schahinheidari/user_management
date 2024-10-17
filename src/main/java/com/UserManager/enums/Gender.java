@@ -1,5 +1,6 @@
 package com.UserManager.enums;
 
 public enum Gender {
-    MALE, FEMALE
+    MALE, FEMALE,
+    آقا, خانم
 }

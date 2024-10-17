@@ -1,6 +1,7 @@
 package com.UserManager.model.dto.user;
 
 import com.UserManager.model.dto.base.AddBaseDto;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,10 @@ public class AddUserDto extends AddBaseDto {
 
     @NotBlank
     private String username;
+
+    @NotBlank
+    @Pattern(regexp = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
+    private String email;
 
     @NotBlank
     private String password;

@@ -12,17 +12,7 @@ import java.util.List;
 @RequestMapping("/user/v1")
 @AllArgsConstructor
 public class UserController {
-    private final UserRepository userRepository;
 
-    @GetMapping("list")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    @PutMapping
-    public User updateUser(@RequestBody User user) {
-        return userRepository.save(user);
-    }
 
 
 }
