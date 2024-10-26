@@ -58,7 +58,7 @@ public class User extends BaseEntity {
     
     private boolean two_factor_enabled = false;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user")
     private List<UserRole> userRoleList;
 
 

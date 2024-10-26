@@ -14,12 +14,12 @@ import java.util.Date;
 public class UserRole extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user_id")
     @NotNull
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ROLE")
+    @JoinColumn(name = "role_id")
     @NotNull
     private Role role;
 

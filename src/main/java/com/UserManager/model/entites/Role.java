@@ -26,10 +26,10 @@ public class Role extends BaseEntity{
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "USER_ROLE")
+    @OneToMany(mappedBy = "role")
     private List<UserRole> userRoleList;
 
-    @OneToMany(mappedBy = "ROLE_PERMISSION")
+    @OneToMany(mappedBy = "role")
     private List<RolePermission> rolePermissionsList;
 
     private boolean is_deletable = false;

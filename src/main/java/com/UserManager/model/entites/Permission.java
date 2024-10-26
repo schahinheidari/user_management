@@ -29,7 +29,7 @@ public class Permission extends BaseEntity{
     @Column(nullable = false)
     private Date updated;
 
-    @OneToMany(mappedBy = "PERMISSION")
+    @OneToMany(mappedBy = "permission")
     private List<RolePermission> rolePermissionsList;
 
 
