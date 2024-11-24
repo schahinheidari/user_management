@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class AddressServiceImp {
+public class AddressService {
 
     private final AddressRepository addressRepository;
 

@@ -3,7 +3,6 @@ package com.UserManager.service;
 import com.UserManager.dao.UserRoleRepository;
 import com.UserManager.exception.ConflictException;
 import com.UserManager.exception.NotFoundException;
-import com.UserManager.model.entites.UserRole;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +11,24 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserRoleImp {
+public class UserRole {
     
     private final UserRoleRepository userRoleRepository;
 
-    public UserRole save(UserRole userRole) {
-        Optional<UserRole> userRoleOptional = userRoleRepository.findById(userRole.getId());
+    public com.UserManager.model.entites.UserRole save(com.UserManager.model.entites.UserRole userRole) {
+        Optional<com.UserManager.model.entites.UserRole> userRoleOptional = userRoleRepository.findById(userRole.getId());
         if (userRoleOptional.isPresent()) {
             throw new ConflictException("UserRole already exists");
         }
         return userRoleRepository.save(userRole);
     }
 
-    public UserRole update(UserRole userRole) {
+    public com.UserManager.model.entites.UserRole update(com.UserManager.model.entites.UserRole userRole) {
         findById(userRole.getId());
         return userRoleRepository.save(userRole);
     }
-    public UserRole findById(Long id) {
-        Optional<UserRole> userRoleOptional = userRoleRepository.findById(id);
+    public com.UserManager.model.entites.UserRole findById(Long id) {
+        Optional<com.UserManager.model.entites.UserRole> userRoleOptional = userRoleRepository.findById(id);
         if (userRoleOptional.isEmpty()) {
             throw new NotFoundException("UserRole not found");
         }
@@ -39,7 +38,7 @@ public class UserRoleImp {
         findById(id);
         userRoleRepository.deleteById(id);
     }
-    public List<UserRole> findAll() {
+    public List<com.UserManager.model.entites.UserRole> findAll() {
         return userRoleRepository.findAll();
     }
 }
