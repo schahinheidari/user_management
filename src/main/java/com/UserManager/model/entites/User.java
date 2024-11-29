@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -61,5 +62,7 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoleList;
 
+    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();*/
 
 }

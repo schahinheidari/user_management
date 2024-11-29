@@ -1,45 +1,67 @@
 package com.UserManager.controller;
 
+import com.UserManager.api.AddressAPI;
+import com.UserManager.exception.NotFoundException;
+import com.UserManager.model.dto.address.AddAddressDto;
+import com.UserManager.model.dto.address.UpdateAddressDto;
+import com.UserManager.model.dto.address.ViewAddressDto;
 import com.UserManager.model.entites.Address;
+import com.UserManager.model.mapper.AddressMapper;
 import com.UserManager.service.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("address/v1/")
 @AllArgsConstructor
-public class AddressController {
+public class AddressController implements AddressAPI {
 
     private final AddressService addressService;
+    private final AddressMapper mapper;
 
-    @PostMapping("/save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Address save(@RequestBody Address address) {
-        return addressService.save(address);
+    @Override
+    public ResponseEntity<ViewAddressDto> save(@RequestBody AddAddressDto addAddressDto) {
+        Address address = mapper.mapAddAddressDtoToAddress(addAddressDto);
+        Address savedAddress = addressService.save(address);
+        ViewAddressDto viewAddressDto = mapper.mapAddressToViewAddressDto(savedAddress);
+        return new ResponseEntity<>(viewAddressDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    @ResponseStatus(HttpStatus.OK)
-    public Address update(@RequestBody Address address) {
-        return addressService.update(address);
+    @Override
+    public ResponseEntity<ViewAddressDto> update(
+            @PathVariable Long id,
+            @RequestBody UpdateAddressDto updateAddressDto) {
+        Address address = mapper.mapUpdateAddressDtoToAddress(updateAddressDto);
+        address.setId(id);
+        Address updatedAddress = addressService.update(address);
+        ViewAddressDto viewAddressDto = mapper.mapAddressToViewAddressDto(updatedAddress);
+        return new ResponseEntity<>(viewAddressDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
+    @Override
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         addressService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/find/{id}")
-    public Address findById(@PathVariable Long id) {
-        return addressService.findById(id);
+    @Override
+    public ResponseEntity<ViewAddressDto> findById(@PathVariable Long id) {
+        try {
+            Address address = addressService.findById(id);
+            ViewAddressDto dto = mapper.mapAddressToViewAddressDto(address);
+            return new ResponseEntity<>(dto, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/list")
-    public List<Address> findAll() {
-        return addressService.findAll();
+    @Override
+    public ResponseEntity<List<ViewAddressDto>> findAll() {
+        List<Address> addresses = addressService.findAll();
+        List<ViewAddressDto> viewAddressDtos = mapper.mapAddressListToViewAddressDtoList(addresses);
+        return new ResponseEntity<>(viewAddressDtos, HttpStatus.OK);
     }
 }

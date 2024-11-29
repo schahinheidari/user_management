@@ -1,6 +1,9 @@
 package com.UserManager.model.entites;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,4 +26,7 @@ public class Address extends BaseEntity {
 
     private String phone;
 
+    /*@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;*/
 }

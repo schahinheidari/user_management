@@ -8,7 +8,6 @@ import org.antlr.v4.runtime.misc.NotNull;
 @Getter
 public class UpdateBaseDto {
 
-    @NotNull
     private Long id;
 
 }

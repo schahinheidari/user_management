@@ -15,19 +15,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Permission extends BaseEntity{
+public class Permission extends BaseEntity {
     private Permissions permissionName;
 
     @Column(nullable = false)
     private String description;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date created;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date updated;
 
     @OneToMany(mappedBy = "permission")
     private List<RolePermission> rolePermissionsList;

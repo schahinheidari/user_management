@@ -7,6 +7,8 @@ import com.UserManager.model.entites.Address;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +19,11 @@ public class AddressService {
     private final AddressRepository addressRepository;
 
     public Address save(Address address) {
-        Optional<Address> addressOptional = addressRepository.findById(address.getId());
+        address.setCreated(LocalDate.now());
+        /*Optional<Address> addressOptional = addressRepository.(address.getId());
         if (addressOptional.isPresent()) {
             throw new ConflictException("Address already exists");
-        }
+        }*/
         return addressRepository.save(address);
     }
 
