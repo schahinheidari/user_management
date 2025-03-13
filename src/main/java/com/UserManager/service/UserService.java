@@ -5,6 +5,9 @@ import com.UserManager.exception.ConflictException;
 import com.UserManager.exception.NotFoundException;
 import com.UserManager.model.entites.User;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +16,10 @@ import java.util.function.Supplier;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     public User save(User user) {
         checkIfUserExists(user);
@@ -61,8 +65,11 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        List<User> userList = userRepository.findAll();
-        return userList;
+        return userRepository.findAll();
+    }
+
+    public Page<User> paging(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
 }

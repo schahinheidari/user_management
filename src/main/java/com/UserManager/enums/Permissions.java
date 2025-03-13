@@ -51,14 +51,5 @@ public enum Permissions {
         return desc;
     }
 
-    /**
-     * Returns a string representation of the permission, including its code and description.
-     *
-     * @return a formatted string with code and description.
-     */
-    @Override
-    public String toString() {
-        return "Permissions [code=" + code + ", desc=" + desc + "]";
-    }
 }
 

@@ -5,6 +5,8 @@ import com.UserManager.exception.ConflictException;
 import com.UserManager.exception.NotFoundException;
 import com.UserManager.model.entites.Address;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -44,5 +46,9 @@ public class AddressService {
     }
     public List<Address> findAll() {
         return addressRepository.findAll();
+    }
+
+    public Page<Address> paging(Pageable pageable) {
+        return addressRepository.findAll(pageable);
     }
 }

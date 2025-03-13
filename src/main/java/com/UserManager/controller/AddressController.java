@@ -9,6 +9,10 @@ import com.UserManager.model.entites.Address;
 import com.UserManager.model.mapper.AddressMapper;
 import com.UserManager.service.AddressService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,5 +67,11 @@ public class AddressController implements AddressAPI {
         List<Address> addresses = addressService.findAll();
         List<ViewAddressDto> viewAddressDtos = mapper.mapAddressListToViewAddressDtoList(addresses);
         return new ResponseEntity<>(viewAddressDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/paging/{page}/{size}")
+    public Page<Address> paging(@PathVariable int page, @PathVariable int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        return addressService.paging(pageable);
     }
 }

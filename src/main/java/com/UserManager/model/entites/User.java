@@ -56,8 +56,8 @@ public class User extends BaseEntity {
 
     @Lob
     private byte[] profile_image;
-    
-    private boolean two_factor_enabled = false;
+
+    //private boolean two_factor_enabled = true;
 
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoleList;
